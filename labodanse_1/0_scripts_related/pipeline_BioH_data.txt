@@ -1,0 +1,13 @@
+
+1. move files (if necessary)
+BioH1_mv_bioh_capt.bash
+
+2. rename files (if necessary)
+BioH2_mv_rename_bioh_capt.bash
+
+3.  (if necessary)
+BioH3_rename_tablette_made-by-hand
+
+BioH4_archive_unnecessary.m
+BioH5_select_good_weights.m
+BioH6_extrac_struct_bioh_capt.m
