@@ -1,0 +1,46 @@
+pipeline HRV
+0. transfer and organize data in the "raw data" folder into the "organized data” folder > 1_data_organized
+- get the csv files and transfer, rename, correct according to the server files (if necessary and if they exist) and transform to mat files
+script: transferingbioharnessfiles_3.m
+- needs another script: importECGbioharness.m (import csv in a mat format)
+
+1. create the structures from ECG data (mat files) -> bioharness_1
+script: createstructbioh2ecg.m (createstructbioh2ecg_1.m for Oct and Dec)
+
+alternative version make by hand (just removing temporally the file)
+
+2. add markers to the structures -> bioharness_2
+script: addmarkers2.m
+markers are in 1_data_markers
+
+3. get the IBI series -> bioharness_3
+- get the IBI series according to the markers of interest
+script: getIBIfromECG.m
+- needs another script: getibi.m (which use the ‘findpeaks' function)
+
+3b. visualisation of IBIs series -> bioharness_3 (and a copy in bioharness_3_only_plots)
+script: plotIBIs.m
+
+4. HRV analysis with R-HRV -> bioharness_3
+- perform HRV analysis and produce mat files for each measure (HRV, HF, LF, HRnoInterp, HRInterp …)
+script: HRV_data_processing_5.R (in Documents/R_HRV)
+
+5. generate structures with HRV data -> bioharness_3
+script: saveHRVfiles.m
+
+5b. visualisation of HRV data -> bioharness_4
+script: plotHRVdata.m
+
+5c. for the tasks compare pre and post
+script:	visualizeHRV.m  -> bioharness_5
+		visualizeHR.m  -> bioharness_6
+
+6. calculate the mean
+script:	computeHRVmean.m -> bioharness_7
+		computeHRmean.m -> bioharness_8
+
+7. exclude outliers (M+-2*SD)
+		selectgooddata.m ->  bioharness_8
+
+
+END

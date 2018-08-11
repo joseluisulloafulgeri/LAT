@@ -1,0 +1,137 @@
+
+	:: general_workspace ::							[scripts applicable to all exp. sessions]
+
+		0_scripts							
+			external
+				R_HRV:						
+					HRV_data_processing_5.R			[processing of IBI data]
+				cell2csv.m					[writes cell array content into a *.csv file]
+				fastsmooth.m					[smooth data]
+				jheapcl.m					[silent clean up of java memory]
+				padconcatenation.m				[concatenates arrays with different sizes and pads with NaN]
+				suplabel.m					[places text as a title, xlabel, or ylabel on a group of subplots]
+			misc
+				archiveunnecessary.m				[re-organize files in a folder]	
+				archiveunnecessary2.m				[re-organize files in a folder]
+				checkingaccelfiles.m				[visualise the accelerometer bioharness files]
+				cleanofmatfiles.m				[remove matlab files]
+				importaccelfile.m				[import accelerometer csv bioharness files]
+				makevideo.m					[make video from png images]
+				makevideo2.m					[make video from png images]
+				sortdata.m					[put light files in a folder apart]
+				sortdata2.m					[put light files in a folder apart]
+				templategetdir.m				[template to get down in different hierarchy of folders]
+
+			processing
+				addmarkers2.m					[preprocessing: add ‘events’ markers ]
+				compiledsec2humantime.m				[transform compiled seconds in human readable time in a char format]
+				getIBIfromECG.m					[script that go through the structures and extract IBIs from ECG]
+				getibi.m					[function to extract IBIs from ECG]
+				humantime2compiledsec.m				[transform human readable time in compiled seconds]
+				importBreathingbioharness.m			[import bioharness breathing data]
+				importECGbioharness.m				[import bioharness EEG data]
+				plotHRVdata.m					[plot data from the HRV structures: IBIs, HR, HRV]
+				plotIBIs.m					[plot IBIs individually for a given dataset]
+				saveHRVfiles.m					[create an HRVstruct to save all files related to the HRV analysis]
+				selectgooddata.m				[exclude subjects whose means are above or below 2SD of the grand mean]
+				timestamps2humandate.m				[transform time stamps to human readable time in string format]
+				timestamps2humandate2.m				[transform time stamps to human readable time in string format]
+
+	:: transfering_files_labodanse::
+
+		0_scripts							
+			misc
+				concatenatemat.m				[script to concatenate data]
+				createcsv.m					[extract and save structure data as a csv file]
+				createmat.m					[extract and save structure data as a mat file]
+				imagesc2.m					[variation of imagesc]
+				mat2csv.m					[transform mat to csv format]
+
+			processing
+				bash
+					mvbiohcapt.bash				[put files one level up in the hierarchy (eliminate the step “No Team Assigned”)]
+					mvrenamebiohcapt.bash			[copy files from raw bioharness folder, into “1_data_organized” and rename]
+					relocatefilesbioharness.bash		[relocate png files according to the tree structure, connectivity bioharness]
+					relocatefilesengagement.bash		[relocate png files according to the tree structure, connectivity engagement]
+				connectivity					*** only this session
+					computedensitySD.m			[intraDensity(S, D); interDensity(S-D)]
+					computedensitySSD.m			[intraDensity(S1, S2, ‘S3 or D’); interDensity(S1S2, S2S3, S1S3)]
+					computedensitySSD2.m			[intraDensity(A or ‘S1+dancers’, B or ‘S2+dancers’); interDensity(A-B or ‘A+dancers - B+dancers’)]
+					computedensitySSDnormaliz.m		[same as computedensitySSD.m, but normalised respect to full connectivity]
+					computematrixcorrelation.m		[script that go through the folders and plot the matrices]
+										use: plotcorrmatrix.m, plotnetwork.m & variableoverlapcorrelation.m
+					extractcentrality.m			[script that go through the structures and calculate centrality measures]
+					extractcentrality2.m			[variation of extractcentrality.m for engagement data]
+					extractdensity.m			[script that go through the structures and calculate density measures]
+										use: computedensitySSD.m
+					extractdensity2.m			[variation of extractdensity.m for engagement data]
+					movingcorrelationspearman.m		[original version of variableoverlapcorrelation.m]
+					plotcorrmatrix.m			[plot correlation matrix as graphs]
+					plotdensity.m				[plot density measures and calculate stats]					
+					plotdensity2.m				[variation of plotdensity.m for step-by-step data]
+					plotnetwork.m				[plot correlation matrix as networks]
+					variableoverlapcorrelation.m		[correlation with variable overlap; two types of correlation]
+				engagement
+					transformdata.m				[pre-processing: interpole NaN values, smooth and normalize the data]
+					calculatederivative.m			[calculate derivative]
+					averagederivative.m			[calculate average of the derivative]
+					sumderivative.m				[calculate sum of the derivative]
+					plotfiguresderivative.m			[plot derivative]
+					doterniaryfromderivative.m		[calculate ternary values; how many subjects have positive, negative, or zero derivative values]
+					computestddev.m				[compute standard deviation; each dance type and session]
+					computestddevfull.m			[compute standard deviation; each session]
+					computestddevsession.m			[compute standard deviation; full experiment]
+					plotstddev.m				[plot the results of standard deviation and mean across subjects]
+
+				addmarkers.m					[add ‘danceType’ markers]
+				computeHRVmean_1.m				[compute mean of the HR data (HRV analysis), for this session]
+				computeHRmean_1.m				[compute mean of the HRV data (HRV analysis), for this session]
+				createstructbioh.m				[create HRBR structure (now an old script; modified to find old files)]
+				createstructbioh2breathing_1.m			[create structure for breathing data]
+				createstructbioh2ecg_1.m			[create structure for ECG data]
+				createstructeng.m				[create structure for engagement data, for this session]
+				plotfigures.m					[plot data contained in structures (HR, BR, x, y), according to danceMarkers]
+				transferingbioharnessfiles_1.m			[recover .csv bioharness files, rename and transform to mat files, for this session]
+				visualizeHRV_1.m				[plot HRV data (HRV analysis), for this session]
+				visualizeHR_1.m					[plot HR data (HRV analysis), for this session]
+
+	:: transfering_files_labodanse_2::
+
+		0_scripts							
+			processing
+				bash
+					mvbiohcapt_2.bash			[put files one level up in the hierarchy (eliminate the step “No Team Assigned”)]
+					mvrenamebiohcapt2.bash			[copy files from raw bioharness folder, into “1_data_organized” and rename]
+				computeHRVmean_2.m				[compute mean of the HRV data (HRV analysis), for this session]
+				computeHRmean_2.m				[compute mean of the HR data (HRV analysis), for this session]
+				createstructbioh2breathing_1_isUsedInstead.txt	[for this session “createstructbioh2breathing_1” was used]
+				createstructbioh2ecg_1_isUsedInstead.txt	[for this session “createstructbioh2ecg_1” was used]
+				transferingbioharnessfiles_2.m			[recover .csv bioharness files, rename and transform to mat files, for this session]
+				visualizeHRV_2.m				[plot HRV data (HRV analysis), for this session]
+				visualizeHR_2.m					[plot HR data (HRV analysis), for this session]
+
+	:: transfering_files_labodanse_3::
+
+		0_scripts							
+			misc
+				checkdatefrombioharnessfiles.m			[get the timing from bioharness files]
+				checkdatefromengagementfiles.m			[check from engagement files the information from both the server and the tablet file]
+				checkingbioharnessrawdata.m			[check timing from bioharness files]
+				checkingorganizeddata.m				[check timing from organized data]]
+				timedelaycheckbiohplotting.m			[plot time difference between sensors and the server]
+				timedelaycheckengplotting.m			[plot time difference between tablets and the server]
+				timedelaycheckengtracking.m			[plot difference of times]
+				timedelayplotbypartseng.m			[not a script, command lines to plot individually engagement data]
+
+			processing
+				engagement
+					transferingengagementfiles.m		[recover .csv engagement files, rename and transform to mat files, for this session]
+				computeHRVmean_3.m				[compute mean of the HRV data (HRV analysis), for this session]
+				computeHRmean_3.m				[compute mean of the HR data (HRV analysis), for this session]
+				createstructbioh2breathing_3.m			[create structure for breathing data]
+				createstructbioh2ecg_3.m			[create structure for ecg data]
+				transferingbioharnessfiles_3.m			[recover .csv bioharness files, rename and transform to mat files, for this session]
+				visualizeHRV_3.m				[plot HRV data (HRV analysis), for this session]
+				visualizeHR_3.m					[plot HR data (HRV analysis), for this session]
+
+% END

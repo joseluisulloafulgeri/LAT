@@ -1,0 +1,45 @@
+pipeline connectivity
+0. transfer and organize data in the "raw data" folder into the "data_organized” folder > 1_data_organized
+- get the csv files, transfer and rename folders
+script: mvrenamebiohcapt.bash
+
+1. create the structures from 'summary’ csv files -> bioharness_1
+script: createstructurebioh
+
+2. add markers to the structures -> bioharness_2
+script: addmarkers.m
+markers are in "1_data_markers/danceType”
+
+3. plot the correlation matrices as matrix plots > bioharness_3
+> OverallByDance
+> Steps1minuteOverlap50s (try1)
+script: computematrixcorrelation.m
+- needs: variableoverlapcorrelation.m
+- needs: plotcorrmatrix.m
+:: data is reorganised with relocatefilebioharness.bash
+
+4. plot the correlation matrices as network plots > bioharness_4
+> OverallByDance
+> Steps1minute (No Overlap) (try2)
+script: computematrixcorrelation.m
+- needs: variableoverlapcorrelation.m
+- needs: plotnetwork.m
+:: data is reorganised with relocatefilebioharness.bash
+
+5. (A) calculate the density measures > bioharness_5
+> Whole: OverallByDance
+> Lags: Steps1minuteOverlap50s (try1)
+> All_D: whole periods
+script: extractdensity.m
+- needs: computedensitySSD.m
+
+5. (B) plot the density measures and compute stats > bioharness_5
+script: plotdensity.m
+
+*** another was tried >bioharness_7
+> Steps1.75min-nooverlap(105sec)
+
+6. calculate centrality measures > bioharness_6
+> Steps1minuteOverlap50sec (try1)
+
+% END
